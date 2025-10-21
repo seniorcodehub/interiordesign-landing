@@ -1,5 +1,12 @@
 "use client";
-import { Sparkles, DollarSign, Users, Package, ScanLine } from "lucide-react";
+import {
+  Sparkles,
+  DollarSign,
+  Users,
+  Package,
+  ScanLine,
+  Lightbulb,
+} from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 const features = [
@@ -27,6 +34,11 @@ const features = [
     icon: ScanLine,
     titleKey: "feature_5_title",
     descKey: "feature_5_desc",
+  },
+  {
+    icon: Lightbulb,
+    titleKey: "feature_6_title",
+    descKey: "feature_6_desc",
   },
 ];
 

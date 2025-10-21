@@ -48,6 +48,20 @@ const dictionaries: Record<Locale, Dictionary> = {
     feature_5_title: "Escaneo 3D Preciso",
     feature_5_desc:
       "Captura las proporciones exactas de cualquier estancia. Tecnología de escaneo avanzada para resultados profesionales.",
+    feature_6_title: "Renderizado Fotorrealista",
+    feature_6_desc:
+      "Genera imágenes hiperrealistas de tus diseños con IA. Presenta propuestas impactantes que parecen fotografías reales.",
+
+    showcase_title: "Experiencias",
+    showcase_subtitle: "Inmersivas",
+    showcase_desc:
+      "Descubre cómo transformamos espacios reales en entornos virtuales completamente interactivos",
+    showcase_video_1_title: "Visualización en Tiempo Real",
+    showcase_video_1_desc:
+      "Experimenta cambios instantáneos en el diseño de interiores",
+    showcase_video_2_title: "Colaboración Inmersiva",
+    showcase_video_2_desc:
+      "Trabaja con tu equipo en un espacio virtual compartido",
 
     how_title: "Cómo",
     how_subtitle: "Funciona",
@@ -135,6 +149,18 @@ const dictionaries: Record<Locale, Dictionary> = {
     feature_5_title: "Precise 3D Scanning",
     feature_5_desc:
       "Capture exact proportions of any room. Advanced scanning technology for professional results.",
+    feature_6_title: "Photorealistic Rendering",
+    feature_6_desc:
+      "Generate hyperrealistic images of your designs with AI. Present impactful proposals that look like real photographs.",
+
+    showcase_title: "Immersive",
+    showcase_subtitle: "Experiences",
+    showcase_desc:
+      "Discover how we transform real spaces into fully interactive virtual environments",
+    showcase_video_1_title: "Real-Time Visualization",
+    showcase_video_1_desc: "Experience instant changes in interior design",
+    showcase_video_2_title: "Immersive Collaboration",
+    showcase_video_2_desc: "Work with your team in a shared virtual space",
 
     how_title: "How",
     how_subtitle: "It Works",
@@ -155,8 +181,7 @@ const dictionaries: Record<Locale, Dictionary> = {
 
     stats_title: "The Future of",
     stats_subtitle: "Interior Design",
-    stats_desc:
-      "The AR/VR market in design is experiencing exponential growth",
+    stats_desc: "The AR/VR market in design is experiencing exponential growth",
 
     market_title: "Our",
     market_subtitle: "Target Market",
@@ -226,4 +251,3 @@ export function useI18n() {
   if (!ctx) throw new Error("useI18n must be used within I18nProvider");
   return ctx;
 }
-

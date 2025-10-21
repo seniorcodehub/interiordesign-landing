@@ -15,9 +15,26 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "logos-world.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.cookielaw.org",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
 
 export default nextConfig;
-

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
+import { ShowcaseSection } from "@/components/showcase-section";
 import { FeaturesSection } from "@/components/features-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { StatsSection } from "@/components/stats-section";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen bg-white">
         <HeroSection />
+        <ShowcaseSection />
         <section id="features">
           <FeaturesSection />
         </section>
@@ -33,4 +35,3 @@ export default function Home() {
     </>
   );
 }
-

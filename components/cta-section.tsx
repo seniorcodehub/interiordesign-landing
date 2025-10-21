@@ -18,7 +18,7 @@ export function CTASection() {
             <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
               {t("cta_sub")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center items-center">
               <Button
                 size="lg"
                 className="bg-white text-[#D4A574] hover:bg-gray-50 px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl group"
@@ -26,13 +26,6 @@ export function CTASection() {
               >
                 {t("cta_primary")}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                className="border-2 border-white/90 text-white hover:bg-white hover:text-[#D4A574] px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-200 bg-transparent"
-                onClick={() => contact.open()}
-              >
-                {t("cta_secondary")}
               </Button>
             </div>
             <p className="mt-8 text-white/70 text-sm">{t("cta_note")}</p>
@@ -42,4 +35,3 @@ export function CTASection() {
     </section>
   );
 }
-

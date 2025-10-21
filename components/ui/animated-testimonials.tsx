@@ -94,14 +94,16 @@ export const AnimatedTestimonials = ({
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  <Image
-                    src={testimonial.src}
-                    alt={testimonial.name}
-                    width={500}
-                    height={500}
-                    draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center"
-                  />
+                  <div className="h-full w-full rounded-3xl bg-white p-4 flex items-center justify-center">
+                    <Image
+                      src={testimonial.src}
+                      alt={testimonial.name}
+                      width={400}
+                      height={200}
+                      draggable={false}
+                      className="h-full w-full object-contain object-center"
+                    />
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -179,4 +181,3 @@ export const AnimatedTestimonials = ({
     </div>
   );
 };
-

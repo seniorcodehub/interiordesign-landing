@@ -2,13 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { useContactModal } from "@/components/ui/contact-modal";
-import { Play } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 export function HeroSection() {
   const contact = useContactModal();
   const { t } = useI18n();
-  
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -43,22 +42,13 @@ export function HeroSection() {
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed">
             {t("hero_desc")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+          <div className="flex justify-center items-center pt-6">
             <Button
               size="lg"
               className="bg-[#D4A574] hover:bg-[#C9A87C] text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
               onClick={() => contact.open()}
             >
               {t("hero_cta_primary")}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white/90 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-[#D4A574] px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-200"
-              onClick={() => contact.open()}
-            >
-              <Play className="mr-2 h-5 w-5" />
-              {t("hero_cta_secondary")}
             </Button>
           </div>
         </div>
@@ -83,4 +73,3 @@ export function HeroSection() {
     </section>
   );
 }
-
