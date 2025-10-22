@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { X, Mail } from "lucide-react";
+import { X, Mail, Loader2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 type ContactModalContextValue = {
   open: () => void;
@@ -26,6 +27,10 @@ export function ContactModalProvider({
   children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   useEffect(() => {
     const handler = (open: boolean) => setIsOpen(open);
@@ -64,20 +69,54 @@ export function ContactModalProvider({
             </p>
             <form
               className="space-y-4"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                const form = e.currentTarget as HTMLFormElement;
-                const formData = new FormData(form);
-                const subject = encodeURIComponent(
-                  "Interior Design XR - Solicitud de contacto"
-                );
-                const body = encodeURIComponent(
-                  `Nombre: ${formData.get("name")}\n` +
-                    `Email: ${formData.get("email")}\n` +
-                    `Empresa: ${formData.get("company")}\n` +
-                    `Mensaje: ${formData.get("message")}`
-                );
-                window.location.href = `mailto:info@interiordesignxr.com?subject=${subject}&body=${body}`;
+                setIsLoading(true);
+                setSubmitStatus("idle");
+
+                try {
+                  const form = e.currentTarget as HTMLFormElement;
+                  const formData = new FormData(form);
+
+                  const templateParams = {
+                    to_email: "codeintime.dev@gmail.com",
+                    from_name: formData.get("name"),
+                    from_email: formData.get("email"),
+                    company: formData.get("company") || "",
+                    message: `Nuevo mensaje de contacto desde Interior Design XR:
+
+Nombre: ${formData.get("name")}
+Email: ${formData.get("email")}
+Empresa: ${formData.get("company") || "No especificada"}
+
+Mensaje:
+${formData.get("message")}
+
+---
+Enviado desde el formulario de contacto de Interior Design XR`,
+                  };
+
+                  await emailjs.send(
+                    "service_9e7uyzc",
+                    "template_re5cvzf",
+                    templateParams,
+                    "sYp_HQSVI7WOCwQhY"
+                  );
+
+                  setSubmitStatus("success");
+                  form.reset();
+
+                  // Auto close after 3 seconds
+                  setTimeout(() => {
+                    setIsOpen(false);
+                    setSubmitStatus("idle");
+                  }, 3000);
+                } catch (error) {
+                  console.error("Error sending email:", error);
+                  setSubmitStatus("error");
+                } finally {
+                  setIsLoading(false);
+                }
               }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -106,23 +145,51 @@ export function ContactModalProvider({
                 rows={4}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#D4A574]"
               />
+              {submitStatus === "success" && (
+                <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 text-sm">
+                    ¡Mensaje enviado correctamente! Te contactaremos pronto.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 text-sm">
+                    Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+                  </p>
+                </div>
+              )}
+
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
                   className="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setSubmitStatus("idle");
+                  }}
+                  disabled={isLoading}
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-md bg-[#D4A574] text-white hover:bg-[#C9A87C]"
+                  className="px-4 py-2 rounded-md bg-[#D4A574] text-white hover:bg-[#C9A87C] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  disabled={isLoading}
                 >
-                  Enviar email
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Enviar mensaje"
+                  )}
                 </button>
               </div>
               <p className="text-xs text-gray-500 pt-2">
-                Esto abrirá tu cliente de email para contactar info@interiordesignxr.com
+                Tu mensaje será enviado directamente a nuestro equipo
               </p>
             </form>
           </div>
@@ -131,4 +198,3 @@ export function ContactModalProvider({
     </>
   );
 }
-
