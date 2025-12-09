@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ui/contact-modal";
@@ -41,15 +42,42 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const country = (headersList.get("x-vercel-ip-country") || "ES").toUpperCase();
+
+  const spanishCountries = [
+    "ES",
+    "MX",
+    "AR",
+    "CO",
+    "PE",
+    "CL",
+    "VE",
+    "EC",
+    "GT",
+    "CU",
+    "BO",
+    "DO",
+    "HN",
+    "PY",
+    "SV",
+    "NI",
+    "CR",
+    "PA",
+    "UY",
+    "PR",
+    "GQ",
+  ];
+  const initialLocale = spanishCountries.includes(country) ? "es" : "en";
   return (
-    <html lang="es">
+    <html lang={initialLocale}>
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
-        <I18nProvider>
+        <I18nProvider initialLocale={initialLocale}>
           <ContactModalProvider>{children}</ContactModalProvider>
         </I18nProvider>
       </body>
